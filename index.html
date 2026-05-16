@@ -3,276 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadir Ulaş | AI & Data Science Researcher</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Kişisel Portfolyo</title>
     <style>
+        /* Temel Ayarlar ve Renk Değişkenleri */
         :root {
-            --primary: #00d2ff; /* Cyber Blue */
-            --secondary: #3a7bd5;
-            --bg: #02060c;
-            --card-bg: rgba(6, 12, 20, 0.85);
-            --border: rgba(0, 210, 255, 0.3);
-            --text: #e0f2f1;
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --white: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
         }
 
-        /* --- Arka Plan: Matrix Veri Akışı --- */
-        #data-canvas {
+        a { text-decoration: none; color: var(--primary-color); }
+        ul { list-style: none; }
+
+        /* Menü (Header & Nav) */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
-            top: 0; left: 0;
-            z-index: -1;
-            opacity: 0.15;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
-        .container {
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
         }
 
-        /* --- Header: Glow Efekti --- */
-        header {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Genel Bölüm Ayarları */
+        section {
+            padding: 6rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
             text-align: center;
-            padding: 80px 20px;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            background: radial-gradient(circle at center, rgba(0,210,255,0.1) 0%, transparent 80%);
-            backdrop-filter: blur(12px);
-            margin-bottom: 40px;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
             position: relative;
         }
 
-        header h1 {
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        /* Ana Ekran (Hero Section) */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            padding-top: 0;
+        }
+
+        .hero-content h1 {
             font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(to bottom, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
-        .university-badge {
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: #555;
+        }
+
+        .btn {
             display: inline-block;
-            margin-top: 15px;
-            padding: 6px 18px;
-            background: rgba(0, 210, 255, 0.1);
-            border: 1px solid var(--primary);
+            padding: 0.8rem 2.5rem;
+            background: var(--secondary-color);
+            color: var(--white);
             border-radius: 50px;
-            font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
         }
 
-        /* --- Bilgi Panelleri --- */
-        .main-layout {
+        .btn:hover {
+            background: #2980b9;
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Hakkımda Bölümü */
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text { flex: 1; }
+        .about-text p { margin-bottom: 1rem; font-size: 1.1rem; }
+        
+        .about-img { 
+            flex: 1; 
+            text-align: center; 
+        }
+
+        .about-img img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Çalışmalar / Dersler Bölümü */
+        .grid-container {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-bottom: 4px solid transparent;
         }
 
         .card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--secondary-color);
         }
 
-        h2 {
-            font-size: 1.4rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
-        /* --- Uzmanlık Alanları (Etiketler) --- */
-        .expert-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        /* İletişim Bölümü */
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        .expert-item {
-            background: rgba(255,255,255,0.03);
-            border-left: 3px solid var(--primary);
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: 0.3s;
+        .form-group { margin-bottom: 1.5rem; }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
-        .expert-item:hover {
-            background: rgba(0, 210, 255, 0.1);
-            transform: translateX(5px);
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
         }
 
-        /* --- Proje/Yazı Kartları --- */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
         }
 
-        .content-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 20px;
-            transition: 0.3s;
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
-        .content-box:hover {
-            background: rgba(255,255,255,0.05);
-        }
+        .submit-btn:hover { background: #1a252f; }
 
-        /* --- Footer Sosyal Medya --- */
-        .social-bar {
-            margin-top: 50px;
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
             text-align: center;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
+            padding: 2rem;
+            margin-top: 4rem;
         }
 
-        .social-bar a {
-            font-size: 1.8rem;
-            color: var(--text);
-            opacity: 0.5;
-            transition: 0.4s;
-        }
-
-        .social-bar a:hover {
-            opacity: 1;
-            color: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        @media (max-width: 900px) {
-            .main-layout { grid-template-columns: 1fr; }
-            header h1 { font-size: 2.2rem; }
-            .expert-list { grid-template-columns: 1fr; }
+        /* Mobil Uyumluluk */
+        @media (max-width: 768px) {
+            .nav-links { display: none; /* Mobil menü ikonuna basıldığında açılacak şekilde JS ile geliştirilebilir */ }
+            .about-content { flex-direction: column; text-align: center; }
+            .hero-content h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="data-canvas"></canvas>
+    <header>
+        <nav>
+            <div class="logo">Adınız <span>Soyadınız</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#about">Hakkımda</a></li>
+                <li><a href="#portfolio">Çalışmalar</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="container">
-        <header>
-            <h1>KADİR ULAŞ</h1>
-            <p style="margin-top:10px; opacity:0.7; letter-spacing:3px;">BİLGİSAYAR MÜHENDİSLİĞİ | YÜKSEK LİSANS</p>
-        </header>
+    <section id="home">
+        <div class="hero-content">
+            <h1>Merhaba, Ben Adınız Soyadınız</h1>
+            <p>Eğitmen, Araştırmacı ve Dijital İçerik Üreticisi</p>
+            <a href="#portfolio" class="btn">Çalışmalarımı İncele</a>
+        </div>
+    </section>
 
-        <div class="main-layout">
-            <div class="side-panel" style="display:flex; flex-direction:column; gap:30px;">
-                <div class="card">
-                    <h2><i class="fas fa-user-astronaut"></i> Profil</h2>
-                    <p style="opacity:0.8; line-height:1.6;">
-                        Namık Kemal Üniversitesi'nde yüksek lisans çalışmalarımı sürdürüyorum. Verinin içindeki gizli desenleri keşfetmeye ve yapay zeka sistemleri geliştirmeye odaklıyım.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h2><i class="fas fa-graduation-cap"></i> Akademik</h2>
-                    <p><strong>Yüksek Lisans</strong><br>NKÜ - Bilgisayar Mühendisliği</p>
-                    <hr style="margin:15px 0; opacity:0.1;">
-                    <p><strong>Lisans</strong><br>Kastamonu Üni. Bilgisayar Mühendisliği</p>
-                </div>
+    <section id="about">
+        <h2 class="section-title">Hakkımda</h2>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="https://via.placeholder.com/350x350" alt="Profil Fotoğrafı">
             </div>
-
-            <div class="main-panel">
-                <div class="card" style="height:100%;">
-                    <h2><i class="fas fa-microchip"></i> Çalışma Alanlarım</h2>
-                    <div class="expert-list">
-                        <div class="expert-item"><i class="fas fa-brain" style="margin-right:8px; color:var(--primary);"></i> Yapay Zeka</div>
-                        <div class="expert-item"><i class="fas fa-layer-group" style="margin-right:8px; color:var(--primary);"></i> Derin Öğrenme</div>
-                        <div class="expert-item"><i class="fas fa-robot" style="margin-right:8px; color:var(--primary);"></i> Makine Öğrenmesi</div>
-                        <div class="expert-item"><i class="fas fa-database" style="margin-right:8px; color:var(--primary);"></i> Veri Madenciliği</div>
-                        <div class="expert-item"><i class="fas fa-eye" style="margin-right:8px; color:var(--primary);"></i> Görüntü İşleme</div>
-                        <div class="expert-item"><i class="fas fa-search" style="margin-right:8px; color:var(--primary);"></i> Web Araması & Bilgi Getirimi</div>
-                    </div>
-
-                    <h2 style="margin-top:40px;"><i class="fas fa-code-branch"></i> Son Çalışmalar</h2>
-                    <div class="content-grid">
-                        <div class="content-box">
-                            <h4 style="color:var(--primary);">Tez Hazırlık / Makale</h4>
-                            <p style="font-size:0.85rem; margin-top:5px; opacity:0.6;">Çalışma başlığı veya alanı buraya gelecek...</p>
-                        </div>
-                        <div class="content-box">
-                            <h4 style="color:var(--primary);">Dataset Analizi</h4>
-                            <p style="font-size:0.85rem; margin-top:5px; opacity:0.6;">Veri madenciliği üzerine güncel bir inceleme...</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="about-text">
+                <p>Merhaba! Ben [Adınız Soyadınız]. Uzun yıllardır [Uzmanlık Alanınız] alanında eğitimler veriyor ve araştırmalar yapıyorum. Amacım, bilgi birikimimi öğrencilerimle ve alana ilgi duyan herkesle en verimli şekilde paylaşmaktır.</p>
+                <p>Şu ana kadar [X] üniversitesinde görev aldım, [Y] projelerinde yer buldum ve [Z] konusunda çeşitli makaleler yayınladım. Öğrenmenin ömür boyu süren bir yolculuk olduğuna inanıyorum.</p>
+                <a href="#contact" class="btn" style="margin-top: 1rem;">Benimle İletişime Geç</a>
             </div>
         </div>
+    </section>
 
-        <div class="social-bar">
-            <a href="https://github.com/kadir-ulas" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:kadirulas@nku.edu.tr"><i class="fas fa-envelope"></i></a>
+    <section id="portfolio">
+        <h2 class="section-title">Öne Çıkan Çalışmalarım</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Online Eğitimler</h3>
+                <p>Udemy ve YouTube üzerinden verdiğim [Konu] eğitimleri ile binlerce öğrenciye ulaştım. Eğitimlerimde teorik bilgiyi pratik uygulamalarla harmanlıyorum.</p>
+            </div>
+            <div class="card">
+                <h3>Akademik Yayınlar</h3>
+                <p>Uluslararası hakemli dergilerde yayınlanmış [Sayı] adet makalem bulunmaktadır. Araştırma alanlarım genellikle [Alan 1] ve [Alan 2] üzerinedir.</p>
+            </div>
+            <div class="card">
+                <h3>Açık Kaynak Projeler</h3>
+                <p>Geliştirdiğim eğitim yazılımları ve araçlarını GitHub üzerinden açık kaynak olarak paylaşıyorum. Topluluğa katkı sağlamak benim için önemli.</p>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        const canvas = document.getElementById('data-canvas');
-        const ctx = canvas.getContext('2d');
+    <section id="contact">
+        <h2 class="section-title">İletişim</h2>
+        <div class="contact-container">
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Adınız Soyadınız</label>
+                    <input type="text" id="name" name="name" required placeholder="Örn: Ahmet Yılmaz">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-posta Adresiniz</label>
+                    <input type="email" id="email" name="email" required placeholder="Örn: ahmet@mail.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Mesajınız</label>
+                    <textarea id="message" name="message" required placeholder="Mesajınızı buraya yazın..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Gönder</button>
+            </form>
+        </div>
+    </section>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    <footer>
+        <p>&copy; 2026 Adınız Soyadınız. Tüm hakları saklıdır.</p>
+    </footer>
 
-        const alphabet = "01010101AI-ML-DATA-IMAGE-PROCESSING-NKU-COMPUTER-ENGINEERING-";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-
-        const rainDrops = [];
-
-        for( let x = 0; x < columns; x++ ) {
-            rainDrops[x] = 1;
-        }
-
-        const draw = () => {
-            ctx.fillStyle = 'rgba(2, 6, 12, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00d2ff';
-            ctx.font = fontSize + 'px monospace';
-
-            for(let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-
-                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
-            }
-        };
-
-        setInterval(draw, 30);
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
 </body>
 </html>
