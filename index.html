@@ -440,6 +440,148 @@
                 left: -29px;
             }
         }
+
+        /* --- AI CHATBOT STİLLERİ --- */
+#chat-circle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 999;
+    padding: 0;
+}
+
+.chat-box {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    max-width: calc(100vw - 60px);
+    height: 450px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--accent-glow);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.chat-box-header {
+    background: rgba(11, 17, 32, 0.9);
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-bot-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff66;
+}
+
+#chat-box-toggle {
+    cursor: pointer;
+    color: var(--text-muted);
+}
+#chat-box-toggle:hover { color: #ff4a4a; }
+
+.chat-box-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Mesaj Balonları */
+.chat-msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.chat-msg.bot {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+    border: 1px solid var(--border-color);
+}
+
+.chat-msg.user {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: #000;
+    font-weight: 500;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+/* Giriş Alanı */
+.chat-input-box {
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 8px;
+    background: rgba(11, 17, 32, 0.5);
+}
+
+.chat-input-box input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+}
+.chat-input-box input:focus { border-color: var(--primary-color); }
+
+.chat-input-box button {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: 0.2s;
+}
+.chat-input-box button:hover { transform: scale(1.1); }
+
+/* Mobil Düzenleme */
+@media (max-width: 480px) {
+    .chat-box {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
+}
     </style>
 </head>
 <body>
@@ -678,6 +820,31 @@
         <p>&copy; 2026 Kadir Ulaş. Tüm Hakları Saklıdır.</p>
     </footer>
 
+    <div id="chat-circle" class="btn-action">
+    <i class="fa-solid fa-comment-dots"></i>
+</div>
+
+<div class="chat-box" id="chat-box">
+    <div class="chat-box-header">
+        <div class="chat-bot-status">
+            <span class="status-dot"></span>
+            <strong>Kadir'in Asistanı (AI)</strong>
+        </div>
+        <span id="chat-box-toggle"><i class="fa-solid fa-xmark"></i></span>
+    </div>
+    <div class="chat-box-body" id="chat-messages">
+        <div class="chat-msg bot">
+            <div class="cm-msg-text">
+                Merhaba! Ben Kadir Ulaş'ın yapay zekâ asistanıyım. Onun deneyimleri, projeleri veya yetenekleri hakkında merak ettiğiniz bir şey var mı?
+            </div>
+        </div>
+    </div>
+    <div class="chat-input-box">
+        <input type="text" id="chat-input" placeholder="Bir şey sorun..." />
+        <button id="chat-submit"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+
     <script>
         // Hamburger Menü Aç/Kapat Mekanizması
         const mobileMenu = document.getElementById('mobile-menu');
@@ -711,6 +878,80 @@
         }
         window.addEventListener("scroll", reveal);
         reveal(); // İlk yüklemede çalıştır
+
+        // --- CHATBOT LOGIC ---
+const chatCircle = document.getElementById('chat-circle');
+const chatBox = document.getElementById('chat-box');
+const chatBoxToggle = document.getElementById('chat-box-toggle');
+const chatInput = document.getElementById('chat-input');
+const chatSubmit = document.getElementById('chat-submit');
+const chatMessages = document.getElementById('chat-messages');
+
+// Pencereyi Aç / Kapat
+chatCircle.addEventListener('click', () => {
+    chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    if(chatBox.style.display === 'flex') chatInput.focus();
+});
+
+chatBoxToggle.addEventListener('click', () => {
+    chatBox.style.display = 'none';
+});
+
+// Mesaj Gönderme Fonksiyonu
+function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+
+    // Kullanıcı mesajını ekrana ekle
+    appendMessage(text, 'user');
+    chatInput.value = '';
+
+    // Yapay zekadan yanıt bekleniyor efekti (Yazıyor...)
+    const loadingId = appendMessage('Düşünüyor...', 'bot');
+
+    // Yapay Zekâ API Bağlantısı (Burayı kendi API'nizle besleyeceksiniz)
+    // Şimdilik simüle edilmiş bir fonksiyon çağırıyoruz:
+    setTimeout(() => {
+        const responseText = getAIResponse(text);
+        document.getElementById(loadingId).querySelector('.cm-msg-text').innerText = responseText;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+}
+
+// Ekrana mesaj basma yardımcı fonksiyonu
+function appendMessage(text, sender) {
+    const msgId = 'msg-' + Date.now();
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('chat-msg', sender);
+    msgDiv.id = msgId;
+    msgDiv.innerHTML = `<div class="cm-msg-text">${text}</div>`;
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return msgId;
+}
+
+// Tetikleyiciler
+chatSubmit.addEventListener('click', sendMessage);
+chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+});
+
+// Basit/Simüle Yapay Zeka Cevap Fonksiyonu 
+// (Gerçek bir projede burası OpenAI/Gemini API'sine fetch atar)
+function getAIResponse(query) {
+    const q = query.toLowerCase();
+    if (q.includes('merhaba') || q.includes('selam')) {
+        return "Merhaba! Size Kadir hakkında nasıl yardımcı olabilirim?";
+    } else if (q.includes('proje') || q.includes('neler yaptı')) {
+        return "Kadir; Yılan Oyunu (Unity), Online Sınav Sistemi (Java), Bilgi Yarışması ve Makine Öğrenmesi ile Sahte Haber Tespiti gibi projeler geliştirdi.";
+    } else if (q.includes('iletişim') || q.includes('telefon' || q.includes('eposta'))) {
+        return "Kadir'e ulaskadir49@gmail.com adresinden veya +90 538 063 71 49 numarasından ulaşabilirsiniz.";
+    } else if (q.includes('yetenek') || q.includes('dil') || q.includes('teknoloji')) {
+        return "Kadir; JavaScript, Java, Flutter, PHP, Laravel, Node.js ve Yapay Zekâ (TensorFlow, PyTorch) konularında uzmandır.";
+    } else {
+        return "Bu konuda detaylı bilgiye sahip değilim ancak Kadir'in CV'sini indirerek veya doğrudan onunla iletişime geçerek öğrenebilirsiniz!";
+    }
+}
     </script>
 </body>
 </html>
