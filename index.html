@@ -46,7 +46,7 @@
             position: fixed;
             width: 100%;
             top: 0;
-            background: rgba(11, 17, 32, 0.9);
+            background: rgba(11, 17, 32, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
@@ -68,12 +68,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: var(--accent-glow);
+            z-index: 1002;
         }
 
         .nav-links {
             display: flex;
             gap: 25px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -99,6 +101,23 @@
         .btn-cv:hover {
             background: rgba(0, 242, 254, 0.1);
             box-shadow: var(--accent-glow);
+        }
+
+        /* Mobil Hamburger Menü İkonu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            border-radius: 2px;
+            transition: 0.3s ease;
         }
 
         /* Ortak Sınıflar ve Animasyonlar */
@@ -143,7 +162,7 @@
             opacity: 0.5;
         }
 
-        /* Hero (Giriş) Bölümü - RESİMLİ */
+        /* Hero (Giriş) Bölümü */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -200,6 +219,7 @@
             font-size: 16px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+            display: inline-block;
         }
 
         .btn-action:hover {
@@ -242,7 +262,7 @@
             100% { transform: scale(1); opacity: 0.5; }
         }
 
-        /* Kart Stilleri (Yetenekler, Projeler, Referanslar) */
+        /* Kart Stilleri */
         .card {
             background: var(--surface-color);
             border: 1px solid var(--border-color);
@@ -340,19 +360,85 @@
             background: var(--surface-color);
         }
 
-        /* Mobil Uyumluluk */
+        /* ==================== MOBİL UYUMLULUK KATMANI (RESPONSIVE) ==================== */
         @media (max-width: 992px) {
             .hero {
                 flex-direction: column-reverse;
                 text-align: center;
-                padding-top: 150px;
+                padding-top: 140px;
+                min-height: auto;
+                gap: 40px;
             }
             .hero-image {
                 width: 280px;
                 height: 280px;
             }
-            .hero h1 { font-size: 40px; }
-            .hero h2 { font-size: 24px; }
+            .hero h1 { font-size: 42px; }
+            .hero h2 { font-size: 26px; }
+            .hero p { margin: 0 auto 30px; }
+            .hero-image-container::after {
+                width: 300px;
+                height: 300px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 100px 20px 40px;
+            }
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 35px;
+            }
+            
+            /* Mobil Hamburger Menü Aktifliği */
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background: var(--surface-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 35px;
+                transition: 0.4s ease;
+                border-left: 1px solid var(--border-color);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.6);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            /* Hamburger İkonu Çarpı Animasyonu */
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 5px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -5px); }
+
+            .card {
+                padding: 20px;
+            }
+            .card style[display="flex"] {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .timeline {
+                padding-left: 20px;
+            }
+            .timeline-item::before {
+                left: -29px;
+            }
         }
     </style>
 </head>
@@ -360,8 +446,15 @@
 
     <header>
         <nav>
-           <a href="#anasayfa" class="logo">Kadir Ulaş</a>
-            <ul class="nav-links">
+            <a href="#anasayfa" class="logo">Kadir Ulaş</a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-list">
                 <li><a href="#hakkimda">Hakkımda</a></li>
                 <li><a href="#deneyim">Deneyim</a></li>
                 <li><a href="#projeler">Projeler</a></li>
@@ -425,57 +518,60 @@
                     <span class="skill-tag">Veri Tabanı Tasarımı</span>
                     <span class="skill-tag">Yapay Zekâ (TensorFlow, Scikit-learn, PyTorch)</span>
                 </div>
+                
                 <h3 style="margin: 25px 0 15px 0; color: var(--text-main);">Sertifikalar & Başarılar</h3>
-    <div style="display: flex; flex-direction: column; gap: 15px;">
-        
-        <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <strong style="color: var(--text-main); font-size: 15px;">Bilgisayar İşletmenliği (Operatörlüğü)</strong><br>
-                <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
-            </div>
-            <a href="sertifika1.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
-                <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
-            </a>
-        </div>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    
+                    <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong style="color: var(--text-main); font-size: 15px;">Bilgisayar İşletmenliği (Operatörlüğü)</strong><br>
+                            <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
+                        </div>
+                        <a href="sertifika1.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
+                            <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
+                        </a>
+                    </div>
 
-        <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <strong style="color: var(--text-main); font-size: 15px;">İş Sağlığı ve Güvenliği</strong><br>
-                <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
-            </div>
-            <a href="sertifika2.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
-                <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
-            </a>
-        </div>
-          <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <strong style="color: var(--text-main); font-size: 15px;">Web Tabanlı İçerik Yönetim Sistemleri</strong><br>
-                <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
-            </div>
-            <a href="sertifika3.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
-                <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
-            </a>
-        </div>
-        <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <strong style="color: var(--text-main); font-size: 15px;">Nesneye Dayalı Programlama - Python</strong><br>
-                <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
-            </div>
-            <a href="sertifika4.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
-                <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
-            </a>
-        </div>
-        <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <strong style="color: var(--text-main); font-size: 15px;">Diksiyon Eğitimi </strong><br>
-                <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
-            </div>
-            <a href="sertifika5.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
-                <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
-            </a>
-        </div>
-
-    </div>
+                    <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong style="color: var(--text-main); font-size: 15px;">İş Sağlığı ve Güvenliği</strong><br>
+                            <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
+                        </div>
+                        <a href="sertifika2.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
+                            <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
+                        </a>
+                    </div>
+                    
+                    <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong style="color: var(--text-main); font-size: 15px;">Web Tabanlı İçerik Yönetim Sistemleri</strong><br>
+                            <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
+                        </div>
+                        <a href="sertifika3.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
+                            <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
+                        </a>
+                    </div>
+                    
+                    <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong style="color: var(--text-main); font-size: 15px;">Nesneye Dayalı Programlama - Python</strong><br>
+                            <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
+                        </div>
+                        <a href="sertifika4.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
+                            <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
+                        </a>
+                    </div>
+                    
+                    <div class="card" style="padding: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong style="color: var(--text-main); font-size: 15px;">Diksiyon Eğitimi</strong><br>
+                            <span style="font-size: 13px; color: var(--text-muted);">Hayat Boyu Öğrenme Genel Müdürlüğü</span>
+                        </div>
+                        <a href="sertifika5.pdf" target="_blank" class="btn-cv" style="padding: 5px 15px; font-size: 12px; white-space: nowrap;">
+                            <i class="fa-solid fa-certificate" style="font-size: 12px; margin-right: 5px; background: none; -webkit-text-fill-color: initial; margin-bottom: 0;"></i>Doğrula
+                        </a>
+                    </div>
+                </div>
 
                 <h3 style="margin: 25px 0 15px 0; color: var(--text-main);">Yabancı Dil</h3>
                 <div class="card" style="padding: 15px; display: inline-block;">
@@ -541,7 +637,6 @@
     <section id="iletisim" class="reveal">
         <h2 class="section-title">İletişim & <span class="gradient-text">Referanslar</span></h2>
         <div class="grid">
-            
             <div class="card">
                 <h3 style="margin-bottom: 20px;">Bana Ulaşın</h3>
                 <div style="display: flex; flex-direction: column; gap: 15px; color: var(--text-muted);">
@@ -567,7 +662,7 @@
             <div>
                 <div class="card" style="margin-bottom: 15px; padding: 20px;">
                     <strong style="color: var(--primary-color);">Umut Sancar</strong><br>
-                    <span style="font-size: 13px; color: var(--text-muted);">Com İlaç Kimya San. ve Tic.Ltd.Şti. - Süreç Geliştirme ve IT Yöneticisi</span><br>
+                    <span style="font-size: 13px; color: var(--text-muted);">Com İlaç Kimya San. ve Tic.Ltd.Şti. - Süreç Geliştirme ve IT Yöneticısı</span><br>
                     <a href="tel:+905424494369" style="font-size: 13px;">+90 542 449 43 69</a>
                 </div>
                 <div class="card" style="padding: 20px;">
@@ -576,7 +671,6 @@
                     <a href="tel:+905377024860" style="font-size: 13px;">+90 537 702 48 60</a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -585,12 +679,30 @@
     </footer>
 
     <script>
+        // Hamburger Menü Aç/Kapat Mekanizması
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navList.classList.toggle('active');
+        });
+
+        // Mobilde linklerden birine tıklanınca menüyü otomatik kapat
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navList.classList.remove('active');
+            });
+        });
+
+        // Scroll Reveal Animasyonu
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
+                var elementVisible = 80; // Mobilde daha rahat tetiklenmesi için düşürüldü
 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
