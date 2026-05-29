@@ -3,161 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[İsminiz] - Profesyonel Portfolyo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Kadir Ulaş - Portfolyo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Genel Ayarlar */
+        /* Modern Karanlık Tema Değişkenleri */
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --primary-color: #3b82f6;
+            --secondary-color: #60a5fa;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
         }
+
         body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
         }
+
         a {
             text-decoration: none;
             color: inherit;
         }
 
-        /* Navigasyon (Menü) */
+        /* Navbar */
         header {
-            background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
             z-index: 1000;
         }
+
         nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
-            max-width: 1200px;
-            margin: 0 auto;
         }
+
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #0056b3;
-        }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-        .nav-links li a {
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        .nav-links li a:hover {
-            color: #0056b3;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Hero (Giriş) Bölümü */
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Bölüm Ortak Stilleri */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 2px;
+            flex: 1;
+            background: var(--border-color);
+            margin-left: 15px;
+        }
+
+        /* Hero */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            align-items: flex-start;
         }
-        .hero h1 {
-            font-size: 48px;
+
+        .hero h3 {
+            color: var(--primary-color);
+            font-weight: 500;
+            letter-spacing: 2px;
             margin-bottom: 10px;
-            color: #212529;
         }
+
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
         .hero h2 {
-            font-size: 24px;
-            font-weight: 300;
-            color: #6c757d;
+            font-size: 40px;
+            color: var(--text-muted);
             margin-bottom: 30px;
         }
-        .btn {
-            padding: 12px 30px;
-            background-color: #0056b3;
-            color: #ffffff;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background 0.3s;
-            display: inline-block;
-        }
-        .btn:hover {
-            background-color: #004494;
+
+        .hero p {
+            max-width: 600px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 16px;
         }
 
-        /* Bölüm Ortak Ayarları */
-        section {
-            padding: 80px 10%;
-            max-width: 1200px;
-            margin: 0 auto;
+        .btn {
+            padding: 15px 30px;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 50px;
-            color: #212529;
+
+        .btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Yetenekler */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-tag {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Deneyim (Timeline) */
+        .timeline {
+            border-left: 2px solid var(--border-color);
+            padding-left: 30px;
+            margin-left: 15px;
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
             position: relative;
         }
-        .section-title::after {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background-color: #0056b3;
-            display: block;
-            margin: 10px auto 0;
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -39px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
         }
 
-        /* Sertifikalar ve Projeler Grid */
-        .grid-container {
+        .timeline-date {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .timeline-company {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Grid Kartlar (Projeler) */
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
+
         .card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
         }
+
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
         }
+
+        .card i {
+            font-size: 30px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
         .card h3 {
             margin-bottom: 10px;
-            color: #0056b3;
         }
+
         .card p {
-            color: #6c757d;
             font-size: 14px;
+            color: var(--text-muted);
         }
 
         /* İletişim */
-        .contact-content {
-            text-align: center;
-        }
-        .contact-content p {
-            margin-bottom: 20px;
-            font-size: 18px;
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        /* Footer */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #212529;
-            color: #ffffff;
-            margin-top: 50px;
+            padding: 30px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 80px;
+            color: var(--text-muted);
+            font-size: 14px;
         }
     </style>
 </head>
@@ -165,73 +293,163 @@
 
     <header>
         <nav>
-            <div class="logo">[İsminiz Baş Harfleri veya Adınız]</div>
+            <div class="logo">KU.</div>
             <ul class="nav-links">
                 <li><a href="#hakkimda">Hakkımda</a></li>
-                <li><a href="#sertifikalar">Sertifikalar</a></li>
+                <li><a href="#deneyim">Deneyim</a></li>
+                <li><a href="#projeler">Projeler</a></li>
                 <li><a href="#iletisim">İletişim</a></li>
-                <li><a href="[cv_dosyaniz.pdf]" target="_blank" class="btn" style="padding: 8px 20px;">CV İndir</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero" id="anasayfa">
-        <h1>Merhaba, Ben [Adınız Soyadınız]</h1>
-        <h2>[Mesleğiniz / Uzmanlık Alanınız]</h2>
-        <p style="max-width: 600px; margin-bottom: 30px; color: #6c757d;">
-            [Buraya kendinizi anlatan kısa, etkili bir veya iki cümle yazın. Örneğin: 5 yılı aşkın süredir dijital dünyada yenilikçi çözümler üretiyorum.]
+    <section class="hero">
+        <h3>MERHABA, BEN</h3>
+        <h1>Kadir Ulaş [cite: 1]</h1>
+        <h2>Bilgisayar Mühendisi [cite: 1]</h2>
+        <p>
+            Yazılım geliştirme alanında 2 yılı aşkın süredir deneyime sahibim. [cite: 2] 
+            Özellikle JavaScript ile web, Java ve Flutter dilleri ile mobil uygulamalar geliştirmekteyim. [cite: 2] 
+            Kariyer hedefim, yenilikçi ve sürdürülebilir projelerde aktif rol alarak yazılım dünyasında kalıcı çözümler sunmaktır. [cite: 4]
         </p>
-        <div>
-            <a href="#iletisim" class="btn">Benimle İletişime Geçin</a>
-        </div>
+        <a href="#iletisim" class="btn">Benimle İletişime Geç</a>
     </section>
 
     <section id="hakkimda">
-        <h2 class="section-title">Hakkımda</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #495057;">
-            [Buraya detaylı özgeçmişinizi, yeteneklerinizi ve vizyonunuzu yazabilirsiniz. Eğitim hayatınızdan, iş tecrübelerinizden ve profesyonel hedeflerinizden bahsedin.]
-        </p>
+        <h2 class="section-title">Hakkımda & Yetenekler</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+            <div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">
+                    Problem çözme yeteneğim ve proje yönetimi becerilerim sayesinde ekip çalışmasına uyum sağlayarak projeleri zamanında ve başarılı bir şekilde tamamlamaktayım. [cite: 3]
+                </p>
+                
+                <h3 style="margin: 30px 0 15px 0;">Eğitim</h3>
+                <div class="card" style="padding: 15px;">
+                    <strong>Kastamonu Üniversitesi (2018-2022)</strong> [cite: 20] <br>
+                    <span style="color: var(--text-muted);">Bilgisayar Mühendisliği - 3.04</span> [cite: 20]
+                </div>
+
+                <h3 style="margin: 30px 0 15px 0;">Yabancı Dil</h3>
+                <div class="card" style="padding: 15px;">
+                    İngilizce (B1 Seviye) [cite: 13, 14]
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="margin-bottom: 20px;">Teknik Yetkinlikler</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">JavaScript [cite: 2]</span>
+                    <span class="skill-tag">Java [cite: 2]</span>
+                    <span class="skill-tag">Flutter [cite: 2]</span>
+                    <span class="skill-tag">Node.js [cite: 7]</span>
+                    <span class="skill-tag">.NET Core [cite: 7]</span>
+                    <span class="skill-tag">Spring Boot [cite: 7]</span>
+                    <span class="skill-tag">C# [cite: 24]</span>
+                    <span class="skill-tag">PHP & Laravel [cite: 28]</span>
+                    <span class="skill-tag">Test Otomasyonu (JUnit, Selenium, Postman) [cite: 6]</span>
+                    <span class="skill-tag">Agile/Scrum Metodolojileri [cite: 6]</span>
+                    <span class="skill-tag">Veri Tabanı Tasarımı [cite: 8]</span>
+                    <span class="skill-tag">Yapay Zekâ (TensorFlow, Scikit-learn, PyTorch) [cite: 11, 12]</span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="sertifikalar" style="background-color: #ffffff;">
-        <h2 class="section-title">Sertifikalar ve Başarılar</h2>
-        <div class="grid-container">
-            
-            <div class="card">
-                <h3>[Sertifika Adı 1]</h3>
-                <p><strong>Kurum:</strong> [Kurum Adı]</p>
-                <p><strong>Tarih:</strong> [Yıl]</p>
-                <p>[Sertifikanın size kattığı yetkinliği kısaca açıklayın.]</p>
+    <section id="deneyim">
+        <h2 class="section-title">İş Deneyimi</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Ocak 2023 - Kasım 2024 [cite: 27]</div>
+                <div class="timeline-title">Yazılım Mühendisi [cite: 27]</div>
+                <div class="timeline-company">Aksiyon Bilişim [cite: 26]</div>
+                <p style="color: var(--text-muted);">
+                    PHP ve Laravel teknolojilerini kullanarak çeşitli kurumsal firmalara yönelik web sitesi geliştirme ve programlama süreçlerini başarıyla yürüttüm. [cite: 28, 29] Sunucu yönetimi kapsamında domain, hosting ve e-posta hesaplarının takibi ile yapılandırma işlemlerini gerçekleştirdim. [cite: 30, 31]
+                </p>
             </div>
-
-            <div class="card">
-                <h3>[Sertifika Adı 2]</h3>
-                <p><strong>Kurum:</strong> [Kurum Adı]</p>
-                <p><strong>Tarih:</strong> [Yıl]</p>
-                <p>[Sertifikanın size kattığı yetkinliği kısaca açıklayın.]</p>
+            <div class="timeline-item">
+                <div class="timeline-date">Eylül 2022 - Aralık 2022 [cite: 23]</div>
+                <div class="timeline-title">Yazılım Stajyeri [cite: 23]</div>
+                <div class="timeline-company">Aksiyon Bilişim [cite: 22]</div>
+                <p style="color: var(--text-muted);">
+                    C# ile ön muhasebe, tekstil, hızlı satış ve restoran masaüstü uygulamaları için setup programı yaptım. [cite: 24] Bu setup projesi ile program kurulumunda %50 gelişme sağlandı. [cite: 25]
+                </p>
             </div>
+        </div>
+    </section>
 
+    <section id="projeler">
+        <h2 class="section-title">Projelerim</h2>
+        <div class="grid">
             <div class="card">
-                <h3>[Sertifika Adı 3]</h3>
-                <p><strong>Kurum:</strong> [Kurum Adı]</p>
-                <p><strong>Tarih:</strong> [Yıl]</p>
-                <p>[Sertifikanın size kattığı yetkinliği kısaca açıklayın.]</p>
+                <i class="fa-solid fa-gamepad"></i>
+                <h3>Yılan Oyunu [cite: 38]</h3>
+                <p>Unity ortamında C# dili kullanılarak geliştirilen klasik yılan oyunu projesi. [cite: 38]</p>
             </div>
-
+            <div class="card">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>Online Sınav Sistemi [cite: 39]</h3>
+                <p>Java ile geliştirilen proje uygulaması altyapısı. [cite: 39]</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-mobile-screen"></i>
+                <h3>Bilgi Yarışması [cite: 39]</h3>
+                <p>Android Studio ortamında Java ile geliştirilmiş mobil bilgi yarışması uygulaması. [cite: 39]</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-film"></i>
+                <h3>Sinema Takip Otomasyonu [cite: 40]</h3>
+                <p>Java altyapısı ile oluşturulan sinema yönetim ve takip sistemi. [cite: 40]</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-robot"></i>
+                <h3>Sahte Haber Tespiti [cite: 40]</h3>
+                <p>Makine Öğrenmesi (Machine Learning) algoritmaları kullanılarak geliştirilmiş bitirme projesi. [cite: 40]</p>
+            </div>
         </div>
     </section>
 
     <section id="iletisim">
-        <h2 class="section-title">İletişim</h2>
-        <div class="contact-content">
-            <p>Benimle projeleriniz, iş teklifleri veya sadece merhaba demek için iletişime geçebilirsiniz.</p>
-            <p><strong>E-posta:</strong> <a href="mailto:ornek@epostaniz.com">[eposta@adresiniz.com]</a></p>
-            <p><strong>LinkedIn:</strong> <a href="[linkedin_profil_linkiniz]" target="_blank">Profilimi Görüntüle</a></p>
+        <h2 class="section-title">Referanslar & İletişim</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Çorlu / Tekirdağ [cite: 18]</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:ulaskadir49@gmail.com">ulaskadir49@gmail.com [cite: 17]</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+905380637149">+90 538 063 71 49 [cite: 16]</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/kadir-ulas/" target="_blank">LinkedIn Profilim [cite: 18]</a>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 20px;">Referanslar</h3>
+                <div class="card" style="margin-bottom: 15px; padding: 20px;">
+                    <strong style="color: var(--primary-color);">Umut Sancar [cite: 34]</strong><br>
+                    <span style="font-size: 14px; color: var(--text-muted);">Com İlaç Kimya San. ve Tic.Ltd.Şti. - Süreç Geliştirme ve IT Yöneticisi [cite: 35]</span><br>
+                    <span style="font-size: 14px;">+90 542 449 43 69 [cite: 35]</span>
+                </div>
+                <div class="card" style="padding: 20px;">
+                    <strong style="color: var(--primary-color);">Yetiş Yener Kurt [cite: 36]</strong><br>
+                    <span style="font-size: 14px; color: var(--text-muted);">TEDİ - Bilgi İşlem Uzmanı [cite: 37]</span><br>
+                    <span style="font-size: 14px;">+90 537 702 48 60 [cite: 37]</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 [Adınız Soyadınız]. Tüm Hakları Saklıdır.</p>
+        <p>&copy; 2026 Kadir Ulaş. Tüm Hakları Saklıdır.</p>
     </footer>
 
 </body>
