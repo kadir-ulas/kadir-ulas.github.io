@@ -360,7 +360,101 @@
             background: var(--surface-color);
         }
 
-        /* ==================== MOBİL UYUMLULUK KATMANI (RESPONSIVE) ==================== */
+        /* ==================== HABER KARTI STİLLERİ ==================== */
+        .news-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: var(--accent-glow);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-card .news-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card .news-source {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .news-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            color: var(--text-main);
+        }
+
+        .news-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 15px;
+        }
+
+        .news-card .news-date {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .news-card .news-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .news-card .news-link:hover {
+            gap: 10px;
+        }
+
+        /* Hata ve Boş Durum Mesajları */
+        .news-error, .news-empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            grid-column: 1/-1;
+        }
+
+        .news-error i, .news-empty i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* ==================== MOBİL UYUMLULUK KATMANI ==================== */
         @media (max-width: 992px) {
             .hero {
                 flex-direction: column-reverse;
@@ -428,180 +522,179 @@
             .card {
                 padding: 20px;
             }
-            .card style[display="flex"] {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
             .timeline {
                 padding-left: 20px;
             }
             .timeline-item::before {
                 left: -29px;
             }
+
+            /* Mobil Haber Kartları */
+            .news-card img {
+                height: 160px;
+            }
         }
 
-        /* --- AI CHATBOT STİLLERİ --- */
-/* --- %100 MOBİL UYUMLU AI CHATBOT STİLLERİ --- */
-#chat-circle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    z-index: 1999;
-    padding: 0;
-    cursor: pointer;
-}
+        /* ==================== AI CHATBOT STİLLERİ ==================== */
+        #chat-circle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 1999;
+            padding: 0;
+            cursor: pointer;
+        }
 
-.chat-box {
-    position: fixed;
-    bottom: 95px;
-    right: 20px;
-    width: 360px;
-    max-width: calc(100vw - 40px);
-    height: 500px;
-    max-height: calc(100vh - 120px);
-    background: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    box-shadow: var(--accent-glow);
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    z-index: 2000;
-    transition: all 0.3s ease;
-}
+        .chat-box {
+            position: fixed;
+            bottom: 95px;
+            right: 20px;
+            width: 360px;
+            max-width: calc(100vw - 40px);
+            height: 500px;
+            max-height: calc(100vh - 120px);
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: var(--accent-glow);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 2000;
+            transition: all 0.3s ease;
+        }
 
-.chat-box-header {
-    background: #0b1120;
-    padding: 16px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .chat-box-header {
+            background: #0b1120;
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.chat-bot-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-}
+        .chat-bot-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
 
-.status-dot {
-    width: 10px;
-    height: 10px;
-    background-color: #00ff66;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #00ff66;
-}
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #00ff66;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00ff66;
+        }
 
-#chat-box-toggle {
-    cursor: pointer;
-    color: var(--text-muted);
-    font-size: 18px;
-    padding: 5px 10px;
-}
-#chat-box-toggle:hover { color: #ff4a4a; }
+        #chat-box-toggle {
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 18px;
+            padding: 5px 10px;
+        }
+        #chat-box-toggle:hover { color: #ff4a4a; }
 
-.chat-box-body {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: rgba(11, 17, 32, 0.2);
-}
+        .chat-box-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: rgba(11, 17, 32, 0.2);
+        }
 
-/* Mesaj Balonları */
-.chat-msg {
-    max-width: 85%;
-    padding: 12px 16px;
-    border-radius: 16px;
-    font-size: 14px;
-    line-height: 1.5;
-    word-break: break-word;
-}
+        /* Mesaj Balonları */
+        .chat-msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
 
-.chat-msg.bot {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-main);
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-    border: 1px solid var(--border-color);
-}
+        .chat-msg.bot {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
 
-.chat-msg.user {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: #000;
-    font-weight: 500;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-}
+        .chat-msg.user {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #000;
+            font-weight: 500;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
 
-/* Giriş ve Gönderme Alanı */
-.chat-input-box {
-    padding: 12px;
-    border-top: 1px solid var(--border-color);
-    display: flex;
-    gap: 10px;
-    background: #0b1120;
-    align-items: center;
-}
+        /* Giriş ve Gönderme Alanı */
+        .chat-input-box {
+            padding: 12px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            background: #0b1120;
+            align-items: center;
+        }
 
-.chat-input-box input {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-color);
-    padding: 12px 16px;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    -webkit-appearance: none; /* iOS için gölge sıfırlama */
-}
-.chat-input-box input:focus { border-color: var(--primary-color); }
+        .chat-input-box input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .chat-input-box input:focus { border-color: var(--primary-color); }
 
-.chat-input-box button {
-    background: transparent;
-    border: none;
-    color: var(--primary-color);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .chat-input-box button {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Telefonlar İçin Ekranı Kaplama Katmanı */
-@media (max-width: 576px) {
-    .chat-box {
-        bottom: 0;
-        right: 0;
-        width: 100vw;
-        height: 100vh;
-        max-width: 100vw;
-        max-height: 100vh;
-        border-radius: 0;
-        border: none;
-    }
-    
-    .chat-box-header {
-        padding: 20px 16px; /* Mobilde daha geniş tıklama alanı */
-    }
+        /* Telefonlar İçin Ekranı Kaplama Katmanı */
+        @media (max-width: 576px) {
+            .chat-box {
+                bottom: 0;
+                right: 0;
+                width: 100vw;
+                height: 100vh;
+                max-width: 100vw;
+                max-height: 100vh;
+                border-radius: 0;
+                border: none;
+            }
+            
+            .chat-box-header {
+                padding: 20px 16px;
+            }
 
-    .chat-input-box {
-        padding-bottom: calc(12px + env(safe-area-inset-bottom)); /* Çentikli iPhone'lar alt bar çakışma önleyici */
-    }
-}
+            .chat-input-box {
+                padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            }
+        }
     </style>
 </head>
 <body>
@@ -620,6 +713,7 @@
                 <li><a href="#hakkimda">Hakkımda</a></li>
                 <li><a href="#deneyim">Deneyim</a></li>
                 <li><a href="#projeler">Projeler</a></li>
+                <li><a href="#haberler">Haberler</a></li>
                 <li><a href="#iletisim">İletişim</a></li>
                 <li><a href="cv.pdf" target="_blank" class="btn-cv">CV Görüntüle</a></li>
             </ul>
@@ -796,6 +890,18 @@
         </div>
     </section>
 
+    <!-- ==================== HABERLER BÖLÜMÜ ==================== -->
+    <section id="haberler" class="reveal">
+        <h2 class="section-title">Bilişim <span class="gradient-text">Dünyasından</span></h2>
+        <div id="news-container" class="grid">
+            <!-- Haberler JavaScript ile buraya gelecek -->
+            <div class="card reveal" style="text-align: center; padding: 40px; grid-column: 1/-1;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 40px;"></i>
+                <p style="color: var(--text-muted); margin-top: 15px;">Haberler yükleniyor...</p>
+            </div>
+        </div>
+    </section>
+
     <section id="iletisim" class="reveal">
         <h2 class="section-title">İletişim & <span class="gradient-text">Referanslar</span></h2>
         <div class="grid">
@@ -840,33 +946,34 @@
         <p>&copy; 2026 Kadir Ulaş. Tüm Hakları Saklıdır.</p>
     </footer>
 
+    <!-- ==================== CHATBOT ==================== -->
     <div id="chat-circle" class="btn-action">
-    <i class="fa-solid fa-comment-dots"></i>
-</div>
-
-<div class="chat-box" id="chat-box">
-    <div class="chat-box-header">
-        <div class="chat-bot-status">
-            <span class="status-dot"></span>
-            <strong>Kadir'in Asistanı (AI)</strong>
-        </div>
-        <span id="chat-box-toggle"><i class="fa-solid fa-xmark"></i></span>
+        <i class="fa-solid fa-comment-dots"></i>
     </div>
-    <div class="chat-box-body" id="chat-messages">
-        <div class="chat-msg bot">
-            <div class="cm-msg-text">
-                Merhaba! Ben Kadir Ulaş'ın yapay zekâ asistanıyım. Onun deneyimleri, projeleri veya yetenekleri hakkında merak ettiğiniz bir şey var mı?
+
+    <div class="chat-box" id="chat-box">
+        <div class="chat-box-header">
+            <div class="chat-bot-status">
+                <span class="status-dot"></span>
+                <strong>Kadir'in Asistanı (AI)</strong>
+            </div>
+            <span id="chat-box-toggle"><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="chat-box-body" id="chat-messages">
+            <div class="chat-msg bot">
+                <div class="cm-msg-text">
+                    Merhaba! Ben Kadir Ulaş'ın yapay zekâ asistanıyım. Onun deneyimleri, projeleri veya yetenekleri hakkında merak ettiğiniz bir şey var mı?
+                </div>
             </div>
         </div>
+        <div class="chat-input-box">
+            <input type="text" id="chat-input" placeholder="Bir şey sorun..." />
+            <button id="chat-submit"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
     </div>
-    <div class="chat-input-box">
-        <input type="text" id="chat-input" placeholder="Bir şey sorun..." />
-        <button id="chat-submit"><i class="fa-solid fa-paper-plane"></i></button>
-    </div>
-</div>
 
     <script>
-        // Hamburger Menü Aç/Kapat Mekanizması
+        // ==================== HAMBURGER MENÜ ====================
         const mobileMenu = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
         
@@ -875,7 +982,6 @@
             navList.classList.toggle('active');
         });
 
-        // Mobilde linklerden birine tıklanınca menüyü otomatik kapat
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
@@ -883,13 +989,13 @@
             });
         });
 
-        // Scroll Reveal Animasyonu
+        // ==================== SCROLL REVEAL ====================
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 80; // Mobilde daha rahat tetiklenmesi için düşürüldü
+                var elementVisible = 80;
 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
@@ -897,91 +1003,166 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // İlk yüklemede çalıştır
+        reveal();
 
-        // --- CHATBOT LOGIC ---
-// --- CHATBOT MOBİL UYUMLU MANIPULASYON ---
-const chatCircle = document.getElementById('chat-circle');
-const chatBox = document.getElementById('chat-box');
-const chatBoxToggle = document.getElementById('chat-box-toggle');
-const chatInput = document.getElementById('chat-input');
-const chatSubmit = document.getElementById('chat-submit');
-const chatMessages = document.getElementById('chat-messages');
-
-// Pencere Aç/Kapat (Mobilde body scroll kilitleme eklendi)
-chatCircle.addEventListener('click', () => {
-    chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
-    if(chatBox.style.display === 'flex') {
-        chatInput.focus();
-        // Telefon ekranındaysa arka plan kaymasını engelle
-        if (window.innerWidth <= 576) {
-            document.body.style.overflow = 'hidden';
+        // ==================== HABERLER API ====================
+        async function fetchTechNews() {
+            const container = document.getElementById('news-container');
+            
+            try {
+                // RSS to JSON API (Ücretsiz ve CORS sorunu yok)
+                const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.wired.com%2Ffeed%2Fcategory%2Ftechnology%2Flatest%2Frss');
+                
+                if (!response.ok) throw new Error('API yanıt vermedi');
+                
+                const data = await response.json();
+                
+                if (data.status !== 'ok' || !data.items || data.items.length === 0) {
+                    throw new Error('Haber bulunamadı');
+                }
+                
+                // İlk 6 haberi göster
+                const newsItems = data.items.slice(0, 6);
+                
+                container.innerHTML = '';
+                
+                newsItems.forEach(item => {
+                    let imageUrl = item.thumbnail || item.enclosure?.link || '';
+                    
+                    if (!imageUrl) {
+                        imageUrl = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"%3E%3Crect width="400" height="200" fill="%23151e32"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial" font-size="20" fill="%234facfe" text-anchor="middle" dy=".3em"%3E📰 Teknoloji Haberi%3C/text%3E%3C/svg%3E';
+                    }
+                    
+                    const pubDate = new Date(item.pubDate);
+                    const formattedDate = pubDate.toLocaleDateString('tr-TR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    const source = item.author || item.categories?.[0] || 'Teknoloji';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'news-card reveal';
+                    card.innerHTML = `
+                        <img src="${imageUrl}" alt="${item.title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'%3E%3Crect width=\'400\' height=\'200\' fill=\'%23151e32\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'Arial\' font-size=\'20\' fill=\'%234facfe\' text-anchor=\'middle\' dy=\'.3em\'%3E📰 Teknoloji Haberi%3C/text%3E%3C/svg%3E'">
+                        <div class="news-content">
+                            <div class="news-source">${source}</div>
+                            <h3>${item.title}</h3>
+                            <p>${item.description ? item.description.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : 'Detaylar için tıklayın.'}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                                <span class="news-date"><i class="fa-regular fa-calendar"></i> ${formattedDate}</span>
+                                <a href="${item.link}" target="_blank" class="news-link">Devamını Oku <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+                
+                setTimeout(reveal, 100);
+                
+            } catch (error) {
+                console.error('Haber yükleme hatası:', error);
+                
+                container.innerHTML = `
+                    <div class="news-error">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <h3 style="color: var(--text-main); margin-bottom: 10px;">Haberler Yüklenemedi</h3>
+                        <p>${error.message}</p>
+                        <button onclick="fetchTechNews()" class="btn-action" style="margin-top: 20px; padding: 10px 25px; font-size: 14px;">
+                            <i class="fa-solid fa-rotate"></i> Tekrar Dene
+                        </button>
+                    </div>
+                `;
+            }
         }
-    }
-});
 
-chatBoxToggle.addEventListener('click', () => {
-    chatBox.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Kaydırmayı geri aç
-});
-
-function sendMessage() {
-    const text = chatInput.value.trim();
-    if (!text) return;
-
-    appendMessage(text, 'user');
-    chatInput.value = '';
-
-    // "Düşünüyor..." mesajı ekle ve benzersiz ID al
-    const loadingId = appendMessage('Düşünüyor...', 'bot');
-
-    setTimeout(() => {
-        const responseText = getAIResponse(text);
-        const loadingEl = document.getElementById(loadingId);
-        if (loadingEl) {
-            loadingEl.querySelector('.cm-msg-text').innerText = responseText;
-        }
-        // Yumuşak kaydırma
-        chatMessages.scrollTo({
-            top: chatMessages.scrollHeight,
-            behavior: 'smooth'
+        // Sayfa yüklendiğinde haberleri çek
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchTechNews();
         });
-    }, 800);
-}
 
-function appendMessage(text, sender) {
-    const msgId = 'msg-' + Date.now();
-    const msgDiv = document.createElement('div');
-    msgDiv.classList.add('chat-msg', sender);
-    msgDiv.id = msgId;
-    msgDiv.innerHTML = `<div class="cm-msg-text">${text}</div>`;
-    chatMessages.appendChild(msgDiv);
-    
-    // Her mesaj eklendiğinde aşağı kaydır
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    return msgId;
-}
+        // Her 30 dakikada bir haberleri yenile
+        setInterval(fetchTechNews, 30 * 60 * 1000);
 
-chatSubmit.addEventListener('click', sendMessage);
-chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendMessage();
-});
+        // ==================== CHATBOT ====================
+        const chatCircle = document.getElementById('chat-circle');
+        const chatBox = document.getElementById('chat-box');
+        const chatBoxToggle = document.getElementById('chat-box-toggle');
+        const chatInput = document.getElementById('chat-input');
+        const chatSubmit = document.getElementById('chat-submit');
+        const chatMessages = document.getElementById('chat-messages');
 
-// Statik veri havuzu
-function getAIResponse(query) {
-    const q = query.toLowerCase();
-    if (q.includes('merhaba') || q.includes('selam')) {
-        return "Merhaba! Ben Kadir'in yapay zekâ asistanıyım. Size nasıl yardımcı olabilirim?";
-    } else if (q.includes('proje') || q.includes('neler yaptı')) {
-        return "Kadir; Yılan Oyunu (Unity), Online Sınav Sistemi (Java), Mobil Bilgi Yarışması ve Makine Öğrenmesi destekli Sahte Haber Tespiti projelerini geliştirdi.";
-    } else if (q.includes('iletişim') || q.includes('ulaş') || q.includes('telefon')) {
-        return "Kadir'e ulaskadir49@gmail.com e-posta adresinden veya +90 538 063 71 49 numarasından hemen ulaşabilirsiniz.";
-    } else if (q.includes('yetenek') || q.includes('teknoloji') || q.includes('programlama')) {
-        return "Kadir; JavaScript, Java, Flutter, Node.js, .NET Core, Spring Boot ve PHP & Laravel backend teknolojilerinde yetkindir.";
-    } else {
-        return "Bu bilgiye şu an ulaşamadım. Detaylar için yukarıdaki menüden Kadir'in güncel CV'sini inceleyebilir veya doğrudan onunla iletişime geçebilirsiniz.";
-    }
-}
+        chatCircle.addEventListener('click', () => {
+            chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+            if(chatBox.style.display === 'flex') {
+                chatInput.focus();
+                if (window.innerWidth <= 576) {
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        });
+
+        chatBoxToggle.addEventListener('click', () => {
+            chatBox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user');
+            chatInput.value = '';
+
+            const loadingId = appendMessage('Düşünüyor...', 'bot');
+
+            setTimeout(() => {
+                const responseText = getAIResponse(text);
+                const loadingEl = document.getElementById(loadingId);
+                if (loadingEl) {
+                    loadingEl.querySelector('.cm-msg-text').innerText = responseText;
+                }
+                chatMessages.scrollTo({
+                    top: chatMessages.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 800);
+        }
+
+        function appendMessage(text, sender) {
+            const msgId = 'msg-' + Date.now();
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-msg', sender);
+            msgDiv.id = msgId;
+            msgDiv.innerHTML = `<div class="cm-msg-text">${text}</div>`;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return msgId;
+        }
+
+        chatSubmit.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        function getAIResponse(query) {
+            const q = query.toLowerCase();
+            if (q.includes('merhaba') || q.includes('selam')) {
+                return "Merhaba! Ben Kadir'in yapay zekâ asistanıyım. Size nasıl yardımcı olabilirim?";
+            } else if (q.includes('proje') || q.includes('neler yaptı')) {
+                return "Kadir; Yılan Oyunu (Unity), Online Sınav Sistemi (Java), Mobil Bilgi Yarışması ve Makine Öğrenmesi destekli Sahte Haber Tespiti projelerini geliştirdi.";
+            } else if (q.includes('iletişim') || q.includes('ulaş') || q.includes('telefon')) {
+                return "Kadir'e ulaskadir49@gmail.com e-posta adresinden veya +90 538 063 71 49 numarasından hemen ulaşabilirsiniz.";
+            } else if (q.includes('yetenek') || q.includes('teknoloji') || q.includes('programlama')) {
+                return "Kadir; JavaScript, Java, Flutter, Node.js, .NET Core, Spring Boot ve PHP & Laravel backend teknolojilerinde yetkindir.";
+            } else {
+                return "Bu bilgiye şu an ulaşamadım. Detaylar için yukarıdaki menüden Kadir'in güncel CV'sini inceleyebilir veya doğrudan onunla iletişime geçebilirsiniz.";
+            }
+        }
     </script>
 </body>
 </html>
